@@ -8,20 +8,10 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// data
-// const db = [
-//   { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
-//   {
-//     id: 2,
-//     author: 'Amanda Doe',
-//     text: 'They really know how to make you happy.'
-//   }
-// ];
-
-// GET /testimonials – ma po prostu zwracać całą zawartość tablicy.
-// GET /testimonials/:id – zwracamy tylko jeden element tablicy, zgodny z :id.
+// DONE GET /testimonials – ma po prostu zwracać całą zawartość tablicy.
+// DONE GET /testimonials/:id – zwracamy tylko jeden element tablicy, zgodny z :id.
 // GET /testimonials/random – zwracamy losowy element z tablicy.
-// POST /testimonials – dodajemy nowy element do tablicy. Możesz założyć, że body przekazywane przez klienta będzie obiektem z dwoma atrybutami author i text. Id dodawanego elementu musisz losować.
+// DONE POST /testimonials – dodajemy nowy element do tablicy. Możesz założyć, że body przekazywane przez klienta będzie obiektem z dwoma atrybutami author i text. Id dodawanego elementu musisz losować.
 // PUT /testimonials/:id – modyfikujemy atrybuty author i text elementu tablicy o pasującym :id. Załóż, że body otrzymane w requeście będzie obiektem z atrybutami author i text.
 // DELETE /testimonials/:id – usuwamy z tablicy wpis o podanym id.
 
@@ -48,7 +38,7 @@ app.post('/testimonials', (req, res) => {
 });
 
 app.put('/testimonials/:id', (req, res) => {
-  console.log(req.body);
+  console.log(req.params);
   db.map(item =>
     item.id == req.params.id
       ? { ...item, author: req.body.author, text: req.body.text }
@@ -58,8 +48,7 @@ app.put('/testimonials/:id', (req, res) => {
 });
 
 app.delete('/testimonials/:id', (req, res) => {
-  console.log(req.params);
-  //db.filter(item => item.id !== req.params.id);
+  db.filter(item => item.id !== req.params.id);
   res.json({ message: 'OK' });
 });
 
