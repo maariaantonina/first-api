@@ -5,6 +5,9 @@
   "repository": "git@github.com:maariaantonina/first-api.git",
   "author": "Maria Kasińska <mariakasinska17@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
