@@ -43,5 +43,7 @@ const io = socket(server);
 
 io.on('connection', socket => {
   console.log('New socket');
-  socket.on('seatsUpdated', seats => {});
+  socket.on('seatsUpdated', seats => {
+    socket.broadcast('seatsUpdated', seats);
+  });
 });
