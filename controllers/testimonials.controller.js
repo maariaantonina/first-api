@@ -2,7 +2,7 @@ const Testimonial = require('../models/testimonial.model');
 
 exports.getAll = async (req, res) => {
   try {
-    res.json(await Testimonial.find().populate('author'));
+    res.json(await Testimonial.find());
   } catch (err) {
     res.status(500).json({ message: err });
   }
