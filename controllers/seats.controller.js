@@ -19,35 +19,17 @@ exports.getById = async (req, res) => {
   }
 };
 
-/*exports.addNew = async (req, res) => {
-  try {
-    const { day, seat, client, email } = req.body;
-    let clientId = '';
-    const client = await Client.findOne({ name: client, email: email }, (err, docs) => {
-      if (err) {
-        const newUser = new Client({ name: client, email: email });
-        newUser.save(err, docs => (clientId = docs._id));
-      } else clientId = docs._id;
-    });
-    const newSeat = new Seat({ day: day, seat: seat, client: clientId });
-    await newSeat.save();
-    res.json({ message: 'OK' });
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-};*/
-
 exports.addNew = async (req, res) => {
   try {
     let clientId = '';
     const { day, seat, client, email } = req.body;
-    const findingClient = await Client.findOne({ name: client, email: email });
+    const existingClient = await Client.findOne({ name: client, email: email });
 
     if (!findingClient) {
       const newUser = await new Client({ name: client, email: email });
       const user = await newUser.save();
       clientId = user._id;
-    } else clientId = findingClient._id;
+    } else clientId = existingClient._id;
 
     const newSeat = new Seat({ day: day, seat: seat, client: clientId });
     await newSeat.save();
