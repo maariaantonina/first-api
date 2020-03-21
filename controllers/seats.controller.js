@@ -25,7 +25,7 @@ exports.addNew = async (req, res) => {
     const { day, seat, client, email } = req.body;
     const existingClient = await Client.findOne({ name: client, email: email });
 
-    if (!findingClient) {
+    if (!existingClient) {
       const newUser = await new Client({ name: client, email: email });
       const user = await newUser.save();
       clientId = user._id;
