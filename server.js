@@ -36,12 +36,18 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-mongoose.connect(
-  'mongodb+srv://maria:bobek@cluster0-o1j4s.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true
-  }
-);
+process.env.NODE_ENV === 'production'
+  ? mongoose.connect(
+      'mongodb+srv://maria:bobek@cluster0-o1j4s.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true
+      }
+    )
+  : mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -61,3 +67,5 @@ io.on('connection', socket => {
     socket.broadcast('seatsUpdated', seats);
   });
 });
+
+module.exports = server;
