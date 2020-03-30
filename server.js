@@ -49,8 +49,7 @@ process.env.NODE_ENV === 'production'
       useUnifiedTopology: true
     });
 
-const db = mon;
-goose.connection;
+const db = mongoose.connection;
 
 db.once('open', () => {
   console.log('Connected to the database');
