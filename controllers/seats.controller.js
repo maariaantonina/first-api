@@ -3,11 +3,7 @@ const Client = require('../models/client.model');
 
 exports.getAll = async (req, res) => {
   try {
-    res.json(
-      await Seat.find()
-        .populate('client')
-        .exec()
-    );
+    res.json(await Seat.find());
   } catch (err) {
     res.status(500).json({ message: err });
   }

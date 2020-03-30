@@ -40,7 +40,8 @@ process.env.NODE_ENV === 'production'
   ? mongoose.connect(
       `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0-o1j4s.mongodb.net/NewWaveDB?retryWrites=true&w=majority`,
       {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
       }
     )
   : mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
@@ -48,7 +49,8 @@ process.env.NODE_ENV === 'production'
       useUnifiedTopology: true
     });
 
-const db = mongoose.connection;
+const db = mon;
+goose.connection;
 
 db.once('open', () => {
   console.log('Connected to the database');
