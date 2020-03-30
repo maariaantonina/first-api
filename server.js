@@ -38,7 +38,7 @@ app.use((req, res) => {
 // connects our backend code with the database
 process.env.NODE_ENV === 'production'
   ? mongoose.connect(
-      'mongodb+srv://maria:bobek@cluster0-o1j4s.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
+      'mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0-o1j4s.mongodb.net/NewWaveDB?retryWrites=true&w=majority',
       {
         useNewUrlParser: true
       }
