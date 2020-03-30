@@ -1,5 +1,6 @@
 const Seat = require('../models/seat.model');
 const Client = require('../models/client.model');
+const sanitize = require('mongo-sanitize');
 
 exports.getAll = async (req, res) => {
   try {
@@ -22,7 +23,8 @@ exports.getById = async (req, res) => {
 exports.addNew = async (req, res) => {
   try {
     let clientId = '';
-    const { day, seat, client, email } = req.body;
+    const cleanData = sanitize(req.body);
+    const { day, seat, client, email } = cleanData;
     const existingClient = await Client.findOne({ name: client, email: email });
 
     if (!existingClient) {
